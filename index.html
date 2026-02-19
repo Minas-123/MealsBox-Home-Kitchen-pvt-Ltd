@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealsBox Home Kitchen | fresh food aggregator Hyderabad</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        body {
+            background: #fef9f1;
+            color: #2e241f;
+            line-height: 1.5;
+        }
+        .wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* header */
+        header {
+            background: white;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 2px solid #f9dbbd;
+        }
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            font-size: 2.5rem;
+            color: #c24e2b;
+            background: #fee8d9;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: #311f17;
+            line-height: 1.1;
+        }
+        .logo-text span {
+            font-size: 0.9rem;
+            color: #b45f3b;
+            background: #fff2e8;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        nav ul {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        nav a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #3b2b23;
+            font-size: 1.05rem;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 5px;
+        }
+        nav a:hover, nav a.active {
+            border-bottom-color: #c7603a;
+            color: #c24e2b;
+        }
+        /* mobile toggle (simplified) */
+        .menu-toggle { display: none; }
+        @media (max-width: 750px) {
+            nav ul { gap: 1rem; }
+        }
+        @media (max-width: 600px) {
+            .header-flex { flex-direction: column; align-items: start; gap: 10px; }
+            nav ul { margin-top: 10px; }
+        }
+
+        /* hero section (home) */
+        .hero {
+            background: linear-gradient(115deg, #fbe6d8 0%, #fff5ec 100%);
+            border-radius: 40px 40px 40px 40px;
+            margin: 30px 0 20px;
+            padding: 2.5rem 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #ffd9bf;
+        }
+        .hero-text h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #2e1d14;
+            line-height: 1.2;
+        }
+        .hero-text h2 i { color: #c95d36; }
+        .hero-text p {
+            font-size: 1.3rem;
+            color: #5f3e2e;
+            margin: 20px 0 15px;
+            max-width: 550px;
+        .hero-badge {
+            background: white;
+            border-radius: 50px;
+            padding: 10px 25px;
+            display: inline-block;
+            box-shadow: 0 8px 12px rgba(190, 95, 40, 0.1);
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        .hero-badge i { color: #b45a31; margin-right: 8px; }
+        .hero-image {
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            font-size: 2.5rem;
+            box-shadow: 0 12px 20px rgba(153, 69, 0, 0.1);
+        }
+        .hero-image i { margin: 0 8px; color: #ba5533; }
+
+        /* section cards */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 50px 0 25px;
+            color: #3d2a1f;
+            border-left: 10px solid #c95d36;
+            padding-left: 25px;
+        }
+        .about-grid, .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: white;
+            border-radius: 35px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.03);
+            margin-bottom: 40px;
+            border: 1px solid #ffe2d0;
+        }
+        .about-highlight {
+            background: #fef4ec;
+            padding: 30px;
+            border-radius: 30px;
+        }
+        .about-highlight h3 {
+            font-size: 1.8rem;
+            color: #311f17;
+            margin-bottom: 15px;
+        }
+        .about-highlight h3 i { color: #be4d2a; margin-right: 10px; }
+        .pill-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 30px 0 20px;
+        }
+        .pill {
+            background: white;
+            border-radius: 60px;
+            padding: 8px 22px;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 8px #f2dacb;
+            border: 1px solid #ffc9ad;
+        }
+        .pill i { color: #c95d36; margin-right: 8px; }
+        .belief-box {
+            background: #c95d36;
+            color: white;
+            padding: 30px;
+            border-radius: 30px;
+            margin-top: 25px;
+        }
+        .belief-box p { font-size: 1.5rem; font-weight: 300; }
+        .belief-box strong { font-weight: 700; font-size: 2rem; display: block; }
+
+        /* address block */
+        .address-block {
+            background: #f2e4d9;
+            border-radius: 30px;
+            padding: 25px;
+            font-size: 1.2rem;
+        }
+        .address-block i { color: #a94724; width: 30px; }
+        .contact-details p { margin: 15px 0; font-size: 1.2rem; }
+
+        /* privacy & terms pages (card style) */
+        .legal-card {
+            background: white;
+            border-radius: 35px;
+            padding: 40px;
+            margin: 30px 0 40px;
+            border: 1px solid #ffdcc9;
+        }
+        .legal-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #3b281f;
+        }
+        .legal-card h4 {
+            font-size: 1.4rem;
+            margin: 30px 0 10px;
+            color: #b14f2c;
+        }
+        .legal-card p, .legal-card li {
+            color: #2f251f;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+        .legal-card ul { margin-left: 30px; }
+
+        /* contact page specific */
+        .map-placeholder {
+            background: #cfc2b8;
+            height: 220px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            background-image: radial-gradient(circle at 20px 20px, #bba28f 2px, transparent 2px), 
+            linear-gradient(#c3ab99, #c3ab99);
+            background-size: 40px 40px, 100%;
+        }
+
+        /* footer */
+        footer {
+            background: #2e241f;
+            color: #f0ded2;
+            padding: 40px 0 25px;
+            border-radius: 50px 50px 0 0;
+            margin-top: 70px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+        .footer-col p { margin: 10px 0; }
+        .footer-col i { margin-right: 10px; color: #d29473; }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #5c4b40;
+            padding-top: 30px;
+            margin-top: 30px;
+            color: #c7b1a2;
+            font-size: 1rem;
+        }
+        .footer-links a {
+            color: #fadbcb;
+            text-decoration: none;
+            display: block;
+            margin: 8px 0;
+            font-weight: 400;
+        }
+        .footer-links a:hover { color: white; }
+        .btn-small {
+            background: #c45f39;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: default;
+        }
+        hr { opacity: 0.2; margin: 20px 0; }
+        .contact-info i { color: #bd572f; width: 30px; }
+        .flex-icon { display: flex; align-items: center; gap: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="wrapper header-flex">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fas fa-utensils"></i></div>
+                <div class="logo-text">
+                    <h1>MealsBox <span style="font-size: 1rem;">Home Kitchen pvt Ltd</span></h1>
+                    <span><i class="fas fa-leaf"></i> meals aggregator · pure veg & non-veg</span>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrapper">
+        <!-- HOME PAGE section (anchor #home) -->
+        <section id="home">
+            <div class="hero">
+                <div class="hero-text">
+                    <h2>Fresh. Healthy. <i class="fas fa-heart" style="color:#c95d36;"></i><br>Just like home</h2>
+                    <p>Hyderabad’s trusted meals aggregator — pure veg & delicious non-veg, delivered fresh.</p>
+                    <div class="hero-badge"><i class="fas fa-truck"></i> 8684881919   |   info@mealsbox.in</div>
+                </div>
+                <div class="hero-image">
+                    <i class="fas fa-bowl-food"></i> <i class="fas fa-drumstick-bite"></i> <i class="fas fa-carrot"></i>
+                </div>
+            </div>
+
+            <!-- quick business info cards (home) -->
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 40px 0;">
+                <div style="background: white; flex:1; min-width: 200px; border-radius: 30px; padding: 25px; border: 1px solid #fad6bf;">
+                    <i class="fas fa-building" style="font-size: 2.2rem; color:#bd572f;"></i>
+                    <h3 style="margin: 15px 0 10px;">Meals aggregator</h3>
+                    <p>We connect home kitchens to you — hygienic, affordable, timely.</p>
+                </div>
+                <div style="background: white; flex:1; min-width: 200px; border-radius: 30px; padding: 25px; border: 1px solid #fad6bf;">
+                    <i class="fas fa-map-pin" style="font-size: 2.2rem; color:#bd572f;"></i>
+                    <h3 style="margin: 15px 0 10px;">Visit / pickup</h3>
+                    <p>HNO. 2-1-40/301, LAKSHMI ARCADE, SURYA NAGAR, UPPAL, Hyderabad - 500039</p>
+                </div>
+            </div>
+
+            <!-- who we serve preview (home) -->
+            <div style="background: #fff6ed; border-radius: 40px; padding: 30px; margin: 30px 0;">
+                <h3 style="font-size: 2rem;"><i class="fas fa-hand-holding-heart"></i> Who we serve</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 25px; margin: 25px 0;">
+                    <span class="pill"><i class="fas fa-user"></i> Senior citizens – light, less oil</span>
+                    <span class="pill"><i class="fas fa-graduation-cap"></i> Students – budget & nutritious</span>
+                    <span class="pill"><i class="fas fa-briefcase"></i> Office staff – timely lunch</span>
+                    <span class="pill"><i class="fas fa-glass-cheers"></i> Small functions & gatherings</span>
+                </div>
+                <p style="font-size:1.2rem"><i class="fas fa-check-circle" style="color:#c95d36;"></i> Freshly cooked daily · No stored food · Hyderabadi flavours (veg & non-veg)</p>
+            </div>
+        </section>
+
+        <!-- ABOUT US section -->
+        <section id="about">
+            <h2 class="section-title">❤️ About MealsBox</h2>
+            <div class="about-grid">
+                <div class="about-highlight">
+                    <h3><i class="fas fa-quote-left"></i> In the busy life of Hyderabad, finding fresh, healthy, affordable home food is not easy.</h3>
+                    <p style="font-size: 1.4rem; margin: 15px 0;">That’s where <strong>MealsBox</strong> steps in ❤️</p>
+                    <p>We serve pure veg & delicious non-veg meals prepared with hygiene, balance, and authentic taste — just like home.</p>
+                    <div class="pill-group">
+                        <span class="pill"><i class="fas-regular fa-bell"></i> Senior citizens</span>
+                        <span class="pill"><i class="fas fa-graduation-cap"></i> Students</span>
+                        <span class="pill"><i class="fas fa-building"></i> Office staff</span>
+                        <span class="pill"><i class="fas fa-calendar-alt"></i> Small functions</span>
+                    </div>
+                    <p><strong>✅ What makes MealsBox special?</strong><br>
+                    Freshly cooked daily · Balanced plate (Sabzi, Dal, Rice/Phulka, Salad, Pickle) <br>
+                    Hyderabadi flavours (Veg & Non-Veg) · Affordable · Clean kitchen & safe packing · On-time delivery</p>
+                </div>
+                <div class="belief-box">
+                    <p>💛 Our Belief</p>
+                    <strong>Food is not just business. Food is responsibility.</strong>
+                    <p style="margin-top: 25px; font-size: 1.4rem;">At MealsBox, every box carries: <br> Care. Quality. Consistency.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT page & ADDRESS proof + details -->
+        <section id="contact">
+            <h2 class="section-title">📬 Contact & Address</h2>
+            <div class="contact-grid">
+                <div class="address-block">
+                    <h3 style="font-size: 1.9rem; margin-bottom: 25px;"><i class="fas fa-store"></i> Registered address</h3>
+                    <p><i class="fas fa-home"></i> HNO. 2-1-40/301, LAKSHMI ARCADE,<br> SURYA NAGAR COLONY, UPPAL, MEDCHAL MALKAJGIRI,<br> Uppal Circle No.2, Hyderabad, Telangana - 500039</p>
+                    <p><i class="fas fa-phone-alt"></i> <strong>8684881919</strong>  (mobile & whatsapp)</p>
+                    <p><i class="fas fa-envelope"></i> info@mealsbox.in</p>
+                    <p><i class="fas fa-globe"></i> www.mealsbox.in (under refresh)</p>
+                    <hr style="border-color:#b38b73;">
+                    <p><i class="fas fa-file-alt"></i> Address proof document on file: same as above. CIN/UDYAM: applied</p>
+                </div>
+                <div>
+                    <div class="map-placeholder"><i class="fas fa-map-marked-alt" style="margin-right: 10px;"></i>  Lakshmi Arcade, Uppal (map integration)</div>
+                    <div style="background: #ffe5d5; border-radius: 30px; padding: 25px; margin-top: 25px;">
+                        <p><i class="fas fa-clock"></i> Office hours: 9 AM – 8 PM (delivery hours 11am–2pm & 6pm–9pm)</p>
+                        <p><i class="fas fa-tag"></i> Nature of business: Meals aggregator · FSSAI licence applied</p>
+                        <p><i class="fas fa-phone"></i> For bulk orders / functions: 8684881919</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRIVACY POLICY section -->
+        <section id="privacy">
+            <h2 class="section-title">🔒 Privacy policy</h2>
+            <div class="legal-card">
+                <h3>Privacy policy – MealsBox Home Kitchen pvt Ltd</h3>
+                <p>Last updated: February 2026</p>
+                <p>Your privacy is important to us. This policy explains how we collect, use, and protect your information when you use our services (website, calls, orders).</p>
+                <h4>Information collection</h4>
+                <p>We collect name, mobile number, delivery address, and order details (veg/non-veg preferences) to fulfil your meals. Payment data is processed via secure gateways; we don’t store card info.</p>
+                <h4>How we use info</h4>
+                <ul>
+                    <li>To deliver fresh meals and notify you.</li>
+                    <li>Improve our menu and service.</li>
+                    <li>Communicate offers (with consent).</li>
+                </ul>
+                <h4>Data sharing</h4>
+                <p>We never sell your data. Only shared with delivery partners to complete your order, or if required by law.</p>
+                <h4>Contact</h4>
+                <p>For privacy concerns: info@mealsbox.in or 8684881919</p>
+                <p><i class="fas fa-shield-alt"></i> We use industry standard security.</p>
+            </div>
+        </section>
+
+        <!-- TERMS AND CONDITIONS -->
+        <section id="terms">
+            <h2 class="section-title">📋 Terms & conditions</h2>
+            <div class="legal-card">
+                <h3>Terms of use – MealsBox Home Kitchen</h3>
+                <h4>1. Acceptance</h4>
+                <p>By placing an order via call or website, you agree to these terms. MealsBox is a meals aggregator platform connecting home kitchens to customers.</p>
+                <h4>2. Pricing & payments</h4>
+                <p>Prices are subject to change. Payment before delivery for new customers; COD available for regulars. Bulk orders require advance.</p>
+                <h4>3. Cancellation & refund</h4>
+                <p>Cancellations accepted before 9:30 AM for lunch and 4:30 PM for dinner. Full refund if order not delivered, else credits.</p>
+                <h4>4. Allergies & hygiene</h4>
+                <p>We package with care but not liable for allergies unknown to us. Please mention while ordering.</p>
+                <h4>5. Delivery area</h4>
+                <p>Currently serving Uppal, Nagole, Habsiguda and nearby (subject to expansion). Minimum order may apply.</p>
+                <h4>6. Governing law</h4>
+                <p>Jurisdiction: Hyderabad, Telangana.</p>
+                <p style="margin-top: 20px;">For any concerns: HNO. 2-1-40/301, LAKSHMI ARCADE, SURYA NAGAR COLONY, UPPAL, Hyderabad - 500039.</p>
+            </div>
+        </section>
+
+        <!-- COMPANY NAME / extra logo line -->
+        <div style="display: flex; justify-content: center; gap: 30px; margin: 60px 0 20px; flex-wrap: wrap;">
+            <span style="background: white; padding: 15px 35px; border-radius: 60px; font-weight: 700; font-size: 1.2rem;"><i class="fas fa-registered"></i> MealsBox Home Kitchen pvt Ltd</span>
+            <span style="background: white; padding: 15px 35px; border-radius: 60px;"><i class="fas fa-store"></i> Meals aggregator · since 2024</span>
+        </div>
+    </main>
+
+    <!-- FOOTER with copyright and all pages links -->
+    <footer>
+        <div class="wrapper">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4 style="color:#f5c6ae;">MealsBox</h4>
+                    <p><i class="fas fa-utensils"></i> Pure Veg & Non-Veg meals</p>
+                    <p><i class="fas fa-heart"></i> Every box: care, quality</p>
+                    <p><i class="fas fa-phone-alt"></i> +91 8684881919</p>
+                    <p><i class="fas fa-envelope"></i> info@mealsbox.in</p>
+                </div>
+                <div class="footer-col footer-links">
+                    <h4>Explore</h4>
+                    <a href="#home">Home</a>
+                    <a href="#about">About us</a>
+                    <a href="#contact">Contact & address</a>
+                    <a href="#privacy">Privacy policy</a>
+                    <a href="#terms">Terms & conditions</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Office address</h4>
+                    <p>HNO. 2-1-40/301, LAKSHMI ARCADE, SURYA NAGAR COLONY, UPPAL, MEDCHAL MALKAJGIRI, Uppal Circle No.2, Hyderabad - 500039</p>
+                    <p><i class="fas fa-check-circle"></i> FSSAI hygiene rated</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2026 MealsBox Home Kitchen pvt Ltd · All rights reserved · Meals aggregator</p>
+                <p style="margin-top: 10px; font-size: 0.95rem;"><i class="fas fa-copyright"></i> Copyright protected. Design & content by MealsBox team.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- optional smooth scroll (just for anchors) -->
+    <script>
+        (function() {
+            // highlight active nav item on scroll (simple)
+            const sections = document.querySelectorAll("section[id]");
+            const navLinks = document.querySelectorAll("nav ul li a");
+            window.addEventListener("scroll", () => {
+                let current = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 90;
+                    if (pageYOffset >= sectionTop) {
+                        current = section.getAttribute("id");
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href") === "#" + current) {
+                        link.classList.add("active");
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
